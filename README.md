@@ -20,12 +20,12 @@
 ```powershell
 > python36 -m venv .\wbcvenv
 > .\wbcvenv\Scripts\activate
-> python36 -m pip install --upgrade pip
-> python36 -m pip install --upgrade tensorflow==1.12.0
-> python36 -m pip install --upgrade tensorflow-gpu==1.12.0
-> python36 -m pip install --upgrade scikit-image==0.14.5
-> python36 -m pip install --upgrade opencv-python
-> python36 -m pip install --upgrade tqdm
+> python36 -m pip install pip
+> python36 -m pip install tensorflow==1.12.0
+> python36 -m pip install tensorflow-gpu==1.12.0
+> python36 -m pip install scikit-image==0.14.5
+> python36 -m pip install opencv-python
+> python36 -m pip install tqdm
 ```
 
 ### Inference with Pre-trained Model
