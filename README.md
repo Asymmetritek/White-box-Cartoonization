@@ -1,8 +1,6 @@
 <img src='paper/shinjuku.jpg' align="left" width=1000>
 
-<hr/>
-
-# Building Upon White-Box Cartoonization as Described in CVRP2020 Paper
+# Building Upon White-Box Cartoonization as Described in CVPR2020 Paper
 
 ## Original Paper and Source
 
