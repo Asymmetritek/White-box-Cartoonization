@@ -39,6 +39,7 @@ def cartoonize(load_folder, save_folder, model_path):
     print(f"Config:\n{config}")
     sess = tf.Session(config=config)
     print(f"Session:\n{sess}")
+    print(f"Devices:\n{sess.list_devices()}")
 
     sess.run(tf.global_variables_initializer())
     saver.restore(sess, tf.train.latest_checkpoint(model_path))
