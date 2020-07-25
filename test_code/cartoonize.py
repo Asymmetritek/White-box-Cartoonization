@@ -1,7 +1,7 @@
 import os
 import cv2
 import numpy as np
-import tensorflow as tf 
+import tensorflow as tf
 import network
 import guided_filter
 from tqdm import tqdm
@@ -20,7 +20,7 @@ def resize_crop(image, size):
     h, w = (h//8)*8, (w//8)*8
     image = image[:h, :w, :]
     return image
-    
+
 
 def cartoonize(load_folder, save_folder, model_path):
     input_photo = tf.placeholder(tf.float32, [1, None, None, 3])
@@ -29,14 +29,20 @@ def cartoonize(load_folder, save_folder, model_path):
 
     all_vars = tf.trainable_variables()
     gene_vars = [var for var in all_vars if 'generator' in var.name]
+    print(f"Gene(rator) vars:\n{gene_vars}")
     saver = tf.train.Saver(var_list=gene_vars)
-    
+    print(f"Saver:\n{saver}")
+
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
+    config.log_device_placement = True
+    print(f"Config:\n{config}")
     sess = tf.Session(config=config)
+    print(f"Session:\n{sess}")
 
     sess.run(tf.global_variables_initializer())
     saver.restore(sess, tf.train.latest_checkpoint(model_path))
+
     name_list = os.listdir(load_folder)
     for name in tqdm(name_list):
         try:
@@ -50,11 +56,12 @@ def cartoonize(load_folder, save_folder, model_path):
             output = (np.squeeze(output)+1)*127.5
             output = np.clip(output, 0, 255).astype(np.uint8)
             cv2.imwrite(save_path, output)
-        except:
+        except Exception as e:
             print('cartoonize {} failed'.format(load_path))
+            print(e)
 
 
-    
+
 
 if __name__ == '__main__':
     model_path = 'saved_models'
@@ -63,6 +70,3 @@ if __name__ == '__main__':
     if not os.path.exists(save_folder):
         os.mkdir(save_folder)
     cartoonize(load_folder, save_folder, model_path)
-    
-
-    
