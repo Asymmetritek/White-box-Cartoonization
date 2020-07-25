@@ -1,1 +1,4 @@
 __pycache__/
+venv36/
+test_code/test_images/
+test_code/cartoonized_images/
